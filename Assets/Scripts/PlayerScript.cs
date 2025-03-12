@@ -77,15 +77,12 @@ public class PlayerScript : MonoBehaviour
         
         //This checks to see if the thing you bumped into has the CoinScript script on it
         CoinScript coin = other.gameObject.GetComponent<CoinScript>();
-        //If it does, run the code block belows
+        
         if (coin != null)
         {
             //Tell the coin that you bumped into them so they can self destruct or whatever
             coin.GetBumped();
-            //Make your score variable go up by one. . .
-            Score++;
-            //And then update the game's score text
-            UpdateScore();
+            
         }
     }
 

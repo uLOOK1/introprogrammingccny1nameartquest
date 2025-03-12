@@ -2,25 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ColorChangerController : MonoBehaviour
+public class ColorChanger : MonoBehaviour
 {
-    //This is about as simple a script as you can imagine
-    //It makes it so that if you hit the space bar, the attached sprite changes colors
-    
-    //This is the SpriteRenderer component in charge of drawing this object's sprite
-    public SpriteRenderer SR;
+    private Renderer objRenderer;
 
-    //This is the color we want the object to turn
-    public Color TargetColor = Color.red;
-    
-    //Any code inside of Update's {} brackets runs once per frame
-    void Update()
+    void Start()
     {
-        //This if statement can be read "If I hit space, change the sprite's color"
-        if (Input.GetKeyDown(KeyCode.Space))
+        objRenderer = GetComponent<Renderer>();
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("color"))
         {
-            //Here we update the SpriteRenderer's color to be whatever TargetColor is set to be
-            SR.color = TargetColor;
+            ChangeColor();
+            Destroy(other.gameObject); // Destroy the coin
         }
+    }
+
+    void ChangeColor()
+    {
+        objRenderer.material.color = new Color(Random.value, Random.value, Random.value);
     }
 }
